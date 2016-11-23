@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models\Visits;
 
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +19,11 @@ class Visit extends Model
     }   
 
     public function visit_item(){
-        return $this->hasMany('App\Models\Visits');
+        return $this->hasMany('App\Models\Visits\Visit_item');
+    }
+
+    public function regimen(){
+        return $this->hasMany('App\Models\Drugs\Regimen', 'id', 'current_regimen_id');
     }
 
 }

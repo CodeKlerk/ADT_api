@@ -55,4 +55,12 @@ class Patient extends Model
     public function patient_partner(){
         return $this->hasMany('App\Models\Patients\Patient_partner');
     }
+
+    public function visit(){
+        return $this->hasMany('App\Models\Visits\Visit');
+    }
+
+    public function appointment(){
+        return $this->hasOne('App\Models\Visits\Appointment');
+    }
 }
