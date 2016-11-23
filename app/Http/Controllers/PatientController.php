@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Patients\Patient;
 
 class PatientController extends Controller
 {
@@ -10,10 +11,15 @@ class PatientController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
+     * Retriving the basic information on a patient
      */
     public function index()
     {
-        //
+        //nextApp, contact, currentReg
+        $patients = Patient::with('patient_status')->get();
+        $response = ['data' => $patients ];
+        return response()->json($response, 200);
     }
 
     /**
