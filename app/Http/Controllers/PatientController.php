@@ -16,7 +16,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //nextApp, contact, currentReg
+        //nextApp,  currentReg
         $patients = Patient::with('patient_status')->get();
         $response = ['data' => $patients ];
         return response()->json($response, 200);
