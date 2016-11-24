@@ -21,17 +21,6 @@ class PatientController extends Controller
         $response = ['data' => $patients ];
         return response()->json($response, 200);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -40,7 +29,28 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // create a patient with the general information
+        $patient = Patient::create($request->all());
+
+        // check if patient has been created
+        if($patient){
+            // get created patients's id and merge it to the request array
+            $b['patient_id'] = $patient->id; 
+        
+            $r = $request->all();  
+            $a = array_merge($r, $b);
+
+            // call to the multi_model_insert function 
+            $this->multi_model_insert([ 'Patient_prophylaxis', 'Patient_tb', 'Patient_drug_allergy', 'Patient_drug_allergy_other', 'Patient_status', 'Patient_illness'] ,$a);
+
+            // response
+            $response = [ 'msg' => 'New Patient added', 'patient' => $patient ];
+            return response()->json($response, 201);
+        }
+
+        $response = [ 'Error' => 'Sorry could not save patient'];
+
+        return response()->json($response, 405);
     }
 
     /**
@@ -87,4 +97,23 @@ class PatientController extends Controller
     {
         //
     }
+
+
+    /**
+     * Store a newly created resource in multiple models
+     *
+     * @param  array $models 
+     * @param  object $data
+     * @return \Illuminate\Http\Response
+     */
+    public function multi_model_insert(array $models, $data) {
+      
+        foreach ($models as $model) {
+            $model = "\\App\Models\Patients\\".$model;
+            $modelclass = new $model;
+            $modelclass->create($data);
+        }
+     
+    }
+
 }
