@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Patients\Patient;
+use App\Models\General\Service;
+use App\Models\General\Status;
+use App\Models\General\Who_stage;
 
 class PatientController extends Controller
 {
@@ -115,4 +118,37 @@ class PatientController extends Controller
         }
      
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     *
+     * Retriving the type of services
+     */
+     public function get_service(){
+         return response()->json( Service::get(), 200);
+     }
+     
+         /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     *
+     * Retriving the type of services
+     */
+     public function get_status(){
+         return response()->json( Status::get(), 200);
+     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     *
+     * Retriving the type of services
+     */
+     public function get_who_stage(){
+         return response()->json( Who_stage::get(), 200);
+     }
 }
