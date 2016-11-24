@@ -27,7 +27,7 @@ class PatientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Patients_post $request)
     {
         // create a patient with the general information
         $patient = Patient::create($request->all());
