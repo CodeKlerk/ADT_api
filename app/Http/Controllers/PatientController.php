@@ -7,6 +7,10 @@ use App\Models\Patients\Patient;
 use App\Models\General\Service;
 use App\Models\General\Status;
 use App\Models\General\Who_stage;
+use App\Models\General\Prophylaxis;
+use App\Models\General\Illness;
+use App\Models\General\Source;
+use App\Models\Drugs\Regimen;
 
 class PatientController extends Controller
 {
@@ -44,7 +48,7 @@ class PatientController extends Controller
             $a = array_merge($r, $b);
 
             // call to the multi_model_insert function 
-            $this->multi_model_insert([ 'Patient_prophylaxis', 'Patient_tb', 'Patient_drug_allergy', 'Patient_drug_allergy_other', 'Patient_status', 'Patient_illness'] ,$a);
+            // $this->multi_model_insert([ 'Patient_prophylaxis', 'Patient_tb', 'Patient_drug_allergy', 'Patient_drug_allergy_other', 'Patient_status', 'Patient_illness'] ,$a);
 
             // response
             $response = [ 'msg' => 'New Patient added', 'patient' => $patient ];
@@ -151,4 +155,49 @@ class PatientController extends Controller
      public function get_who_stage(){
          return response()->json( Who_stage::get(), 200);
      }
+     
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     *
+     * Retriving the type of prophylaxis
+     */
+     public function get_prophylaxis(){
+         return response()->json( Prophylaxis::get(), 200);
+     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     *
+     * Retriving the type of illness
+     */
+     public function get_illness(){
+         return response()->json( Illness::get(), 200);
+     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     *
+     * Retriving the type of source
+     */
+     public function get_source(){
+         return response()->json( Source::get(), 200);
+     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     *
+     * Retriving the type of Regimen
+     */
+     public function get_regimen(){
+         return response()->json( Regimen::get(), 200);
+     }
+
 }

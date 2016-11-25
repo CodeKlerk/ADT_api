@@ -25,4 +25,9 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function(){
     Route::get('get_service', 'PatientController@get_service');
     Route::get('get_status', 'PatientController@get_status');
     Route::get('get_who_stage', 'PatientController@get_who_stage'); 
+    Route::get('get_illness', 'PatientController@get_illness');
+    Route::get('get_prophylaxis', 'PatientController@get_prophylaxis');
+    Route::get('get_source', 'PatientController@get_source');
+    Route::get('get_regimen', 'PatientController@get_regimen');
+    
 });
