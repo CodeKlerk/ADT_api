@@ -17,12 +17,12 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::group(['prefix' => 'v1'], function(){
+Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function(){
     Route::resource('patients', 'PatientController',[
         'except' => ['edit', 'create']
     ]);
 
     Route::get('get_service', 'PatientController@get_service');
     Route::get('get_status', 'PatientController@get_status');
-    Route::get('get_who_stage', 'PatientController@get_who_stage');
+    Route::get('get_who_stage', 'PatientController@get_who_stage'); 
 });
