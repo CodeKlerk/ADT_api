@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Source extends Model
 {
     protected $table = 'tbl_source';
-    protected $hidden = ['id', 'is_active'];
+    protected $hidden = ['is_active'];
 }

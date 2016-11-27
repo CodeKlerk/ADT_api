@@ -134,7 +134,7 @@ class PatientController extends Controller
          return response()->json( Service::get(), 200);
      }
      
-         /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
