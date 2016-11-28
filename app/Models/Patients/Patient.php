@@ -53,7 +53,7 @@ class Patient extends Model
     }
 
     public function patient_partner(){
-        return $this->hasMany('App\Models\Patients\Patient_partner');
+        return $this->hasOne('App\Models\Patients\Patient_partner');
     }
 
     public function visit(){

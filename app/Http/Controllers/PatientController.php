@@ -23,7 +23,6 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //nextApp,  currentReg
         $patients = Patient::with('patient_status.status', 'visit.regimen', 'appointment')->get();
         $response = ['data' => $patients ];
         return response()->json($response, 200);
@@ -48,7 +47,7 @@ class PatientController extends Controller
             $a = array_merge($r, $b);
 
             // call to the multi_model_insert function 
-            // $this->multi_model_insert([ 'Patient_prophylaxis', 'Patient_tb', 'Patient_drug_allergy', 'Patient_drug_allergy_other', 'Patient_status', 'Patient_illness'] ,$a);
+            // $this->multi_model_insert($model,[ 'Patient_prophylaxis', 'Patient_tb', 'Patient_drug_allergy', 'Patient_drug_allergy_other', 'Patient_status', 'Patient_illness'] ,$a);
 
             // response
             $response = [ 'msg' => 'New Patient added', 'patient' => $patient ];
@@ -68,7 +67,12 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        //
+        $patient = Patient::findOrFail($id);
+        $patient->load('patient_partner', 'patient_family_planning', 'patient_drug_allergy', 'visit', 'patient_drug_other', 'patient_drug_allergy');
+
+        $response = [ 'patient' => $patient ];
+
+        return response()->json($response, 200);
     }
 
     /**
@@ -113,14 +117,13 @@ class PatientController extends Controller
      * @param  object $data
      * @return \Illuminate\Http\Response
      */
-    public function multi_model_insert(array $models, $data) {
+    public function multi_model_insert($model, array $models, $data) {
       
         foreach ($models as $model) {
             $model = "\\App\Models\Patients\\".$model;
             $modelclass = new $model;
             $modelclass->create($data);
         }
-     
     }
 
     /**

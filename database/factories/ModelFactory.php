@@ -12,13 +12,26 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
+$factory->define(App\Models\Patients\Patient::class, function (Faker\Generator $faker) {
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'ccc_number' => $faker->unique()->Text,
+        'first_name' => $faker->name,
+        'last_name' => $faker->name,
+        'other_name' => $faker->name,
+        'phone_number' => $faker->unique()->number,
+        'alternate_number' => $faker->unique()->number,
+        'physical_address' => $faker->text,
+        'gender' => 'Female'
+        'birth_date' => $faker->date,
+        'enrollment_date' => $faker->date,
+        'support_group' => $faker->text,
+        'is_pregnant' => '0',
+        'is_tb' => '0',
+        'is_tb_tested' => '0' ,
+        'is_smoke' => '0',
+        'is_alchohol' => '0',
+        'is_sms' => '1'
     ];
 });
+
